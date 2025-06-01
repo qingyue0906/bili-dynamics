@@ -80,7 +80,7 @@ def parse_dynamic(dynamic: dict) -> dict|None:
         # 时间戳转换
         formatted_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(author.get('pub_ts')))
         return {
-            "dynamic_id": dynamic.get('id_str'),
+            "dynamic_id": int(dynamic.get('id_str')),
             "time": formatted_time,
             "type": dynamic['type'],
             "item": item
