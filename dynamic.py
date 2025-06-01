@@ -33,23 +33,9 @@ async def get_dynamics(u: User, sleep_time: float = 1.0, stop_value: int = 0) ->
             # 如果没有更多动态，跳出循环
             break
 
-        '''
-        # 我晕了，完全搞不懂啊
-        if [dy_id for dy_id in page["items"] if int(dy_id['id_str']) <= stop_value]:
-            duplicate = [a for i in dynamics if (a := i) and int(a['id_str']) <= stop_value] 
-            print(duplicate)
-            dynamics = [x for x in dynamics if x not in duplicate]
-            break
-        '''
         # 先判断 page["items"] 中是否有 id_str 小于等于 stop_value 的
         if any(int(item['id_str']) <= stop_value for item in page["items"]):
-            # 过滤出所有符合条件的 dynamics 项
-            duplicate = [item for item in dynamics if int(item['id_str']) <= stop_value]
-            # 移除 duplicate 中的项
-            dynamics = [item for item in dynamics if int(item['id_str']) > stop_value]
-            # print(dynamics)
             break
-
 
         # 设置 offset，用于下一轮循环
         offset = page["offset"]
@@ -59,6 +45,7 @@ async def get_dynamics(u: User, sleep_time: float = 1.0, stop_value: int = 0) ->
     # 打印动态数量
     print(f"遍历 {len(dynamics)} 条动态")
 
+    dynamics = [item for item in dynamics if int(item['id_str']) > stop_value]
     return dynamics
 
 def parse_dynamic(dynamic: dict) -> dict|None:
