@@ -13,3 +13,5 @@ yarl
 pycryptodomex
 qrcode_terminal
 PyJWT
+
+flask
