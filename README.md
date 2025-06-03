@@ -8,4 +8,9 @@
 可在已保存的图文动态之上追加新的图文动态。
 a_re_download_all.py的作用是重试失败的下载。
 
+## 更改
+用gpt写了个web应用用来预览保存的图片
+![img.png](assets/img.png)
+![img_2.png](assets/img_2.png)
+
 
